@@ -1,29 +1,22 @@
 <template>
     <div>
-        <table class="table table-bordered">
+        <table id="table" class="table table-bordered">
             <thead>
                 <tr>
-                    <td>id</td>
-                    <td>status</td>
-                    <td>Nombre Agente</td>
-                    <td>Correo</td>
-                    <td>Telefono</td>
-                    <td>Fecha Inicio</td>
-                    <td>Fecha Fin</td>
-                    <td>Acciones</td>
+                    <td v-for="(column, index) in props.head" :key="index">{{ column }}</td>
                 </tr>
             </thead>
-            <tbody v-for="usu in usuarios">
+            <tbody v-for="info in infoData">
                 <tr>
-                    <td>{{ usu.id }}</td>
-                    <td>{{ usu.status == 1 ? "Activo" : "Inactivo" }}</td>
-                    <td>{{ usu.nombre + ' ' + usu.apellido_paterno + ' ' + usu.apellido_materno }}</td>
-                    <td>{{ usu.correo }}</td>
-                    <td>{{ usu.telefono }}</td>
-                    <td>{{ usu.fechaInicio != null ? usu.fechaInicio : "No Disponible" }}</td>
-                    <td>{{ usu.fechaFin != null ? usu.fechaFin : "No Disponible" }}</td>
+                    <td>{{ info.id }}</td>
+                    <td>{{ info.status == 1 ? "Activo" : "Inactivo" }}</td>
+                    <td>{{ info.nombre + ' ' + info.apellido_paterno + ' ' + info.apellido_materno }}</td>
+                    <td>{{ info.correo }}</td>
+                    <td>{{ info.telefono }}</td>
+                    <td>{{ info.fechaInicio != null ? info.fechaInicio : "No Disponible" }}</td>
+                    <td>{{ info.fechaFin != null ? info.fechaFin : "No Disponible" }}</td>
                     <td>
-                        <NuxtLink :to="`/usuario/${usu.id}`"> Ver </NuxtLink> <button> Editar </button> <button>
+                        <NuxtLink :to="`/${props.tabla}/${info.id}`"> Ver </NuxtLink> <button> Editar </button> <button>
                             Documentos
                         </button>
                     </td>
@@ -34,8 +27,17 @@
 </template>
 
 <script setup>
-//fetch agentes
-const { data: usuarios } = await useFetch('http://localho.st:8091/v1/agente/list')
+const props = defineProps({
+    head: Array,
+    tabla: String
+});
+
+const { data: infoData } = await useFetch('http://localho.st:8091/v1/' + props.tabla + '/list', {
+    method: 'GET',
+    mode: 'no-cors',
+    credentials: 'include'
+})
+
 </script>
 
 <style scoped></style>

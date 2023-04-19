@@ -1,15 +1,13 @@
 <template>
     <div>
-
+        hay
     </div>
 </template>
 
 <script setup>
-    useHead({
-        title:"Usuarios"
-    })
+useHead({
+    title: "Usuarios"
+})
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
