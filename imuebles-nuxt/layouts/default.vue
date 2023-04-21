@@ -1,8 +1,6 @@
 <template>
   <Navbar />
   <NavbarSidebar />
-
-
   <main class="maincss" id="maincss">
     <slot />
   </main>
@@ -11,6 +9,15 @@
 </template>
 
 <script setup>
+
+onMounted(() => {
+  if (!process.client) return;
+  const token = localStorage.getItem('token');
+
+  if (token == null)
+    location.href('http://localhost:3000/login')
+})
+
 // hook para administrar los css y js en este caso los de Bootstrap, asi como el titulo de la pag en general
 useHead({
   // titleTemplate es para settear una estructura del titulo el %s indica que puede ser sustituido por un string
