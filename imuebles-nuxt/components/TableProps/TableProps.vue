@@ -6,8 +6,8 @@
                     <td v-for="(column, index) in props.head" :key="index">{{ column }}</td>
                 </tr>
             </thead>
-            <tbody v-for="info in infoData">
-                <tr>
+            <tbody>
+                <tr v-for="info in infoData">
                     <td>{{ info.id }}</td>
                     <td>{{ info.status == 1 ? "Activo" : "Inactivo" }}</td>
                     <td>{{ info.nombre + ' ' + info.apellido_paterno + ' ' + info.apellido_materno }}</td>
@@ -16,7 +16,10 @@
                     <td>{{ info.fechaInicio != null ? info.fechaInicio : "No Disponible" }}</td>
                     <td>{{ info.fechaFin != null ? info.fechaFin : "No Disponible" }}</td>
                     <td>
-                        <NuxtLink :to="`/${props.tabla}/${info.id}`"> Ver </NuxtLink> <button> Editar </button> <button>
+                        <div @click="$router.push({ path: `/${props.tabla}s/${info.id}`, params=info })">Ver
+                        </div>
+                        <button>
+                            Editar </button> <button>
                             Documentos
                         </button>
                     </td>
@@ -32,11 +35,14 @@ const props = defineProps({
     tabla: String
 });
 
-const { data: infoData } = await useFetch('http://localho.st:8091/v1/' + props.tabla + '/list', {
+let { data: infoData } = useFetch('http://localho.st:8091/v1/' + props.tabla + '/list', {
     method: 'GET',
-    mode: 'no-cors',
-    credentials: 'include'
-})
+    headers: {
+        'Content-Type': 'application/json',
+        mode: 'no-cors'
+        //        'Authentication': 'Beaber ' + localStorage.getItem('token')
+    },
+});
 
 </script>
 
