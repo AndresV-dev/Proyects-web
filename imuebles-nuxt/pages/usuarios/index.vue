@@ -10,7 +10,7 @@
 const titles = ['id', 'status', 'Nombre Usuario', 'Correo', 'Telefono', 'Fecha Inicio', 'Fecha Fin', 'Acciones'];
 const tabla = "usuario";
 useHead({
-    title: "Usuario"
+    title: "Usuarios"
 })
 </script>
 
