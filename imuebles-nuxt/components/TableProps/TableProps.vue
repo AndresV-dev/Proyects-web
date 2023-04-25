@@ -16,12 +16,8 @@
                     <td>{{ info.fechaInicio != null ? info.fechaInicio : "No Disponible" }}</td>
                     <td>{{ info.fechaFin != null ? info.fechaFin : "No Disponible" }}</td>
                     <td>
-                        <div @click="$router.push({ path: `/${props.tabla}s/${info.id}`, params=info })">Ver
-                        </div>
-                        <button>
-                            Editar </button> <button>
-                            Documentos
-                        </button>
+                        <NuxtLink class="rounded bg-blue-600, text-gray-800" :to='`/${props.tabla}s/${info.id}`'>Ver
+                        </NuxtLink>
                     </td>
                 </tr>
             </tbody>
@@ -35,15 +31,13 @@ const props = defineProps({
     tabla: String
 });
 
-let { data: infoData } = useFetch('http://localho.st:8091/v1/' + props.tabla + '/list', {
+let { data: infoData } = await useFetch('http://localho.st:8091/v1/' + props.tabla + '/list', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
-        mode: 'no-cors'
-        //        'Authentication': 'Beaber ' + localStorage.getItem('token')
+        'Authentication': 'Beaber ' + localStorage.getItem("token")
     },
 });
-
 </script>
 
 <style scoped></style>

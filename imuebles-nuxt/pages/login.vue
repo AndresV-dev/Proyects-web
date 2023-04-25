@@ -9,15 +9,52 @@
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
   </form>
 </template>
+<!--
+<script>
+export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        password: ""
+      }
+    }
+  },
+  methods: {
+    async login() {
+      try {
+        let { data: dat } = useFetch('http://localhost:8091/v1/auth/authenticate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: form.email,
+            password: form.password
+          })
+        });
 
+        localStorage.setItem('token', dat.value.token);
+      } catch (error) {
+        console.log("Error on Login")
+      }
+    }
+  }
+
+}
+</script>
+-->
 <script setup>
+definePageMeta({
+  layout: 'login'
+})
+
 const form = reactive({
   email: "",
-  password: "",
-});
+  password: ""
+})
 
-function login() {
-  let { data: dat } = useFetch('http://localhost:8080/api/v1/auth/authenticate', {
+async function login() {
+
+  let { data: dat } = await useFetch('http://localhost:8091/v1/auth/authenticate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -26,6 +63,8 @@ function login() {
     })
   });
 
-  localStorage.setItem('token', dat.value.token);
+  let dataRaw = toRaw(dat.value);
+  console.log(dataRaw);
+  localStorage.setItem('token', dataRaw.token);
 }
 </script>
