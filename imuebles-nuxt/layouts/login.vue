@@ -5,9 +5,6 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: 'login'
-})
 // hook para administrar los css y js en este caso los de Bootstrap, asi como el titulo de la pag en general
 useHead({
     // titleTemplate es para settear una estructura del titulo el %s indica que puede ser sustituido por un string
