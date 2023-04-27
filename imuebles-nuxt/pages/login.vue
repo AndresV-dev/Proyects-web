@@ -43,6 +43,9 @@ export default {
 </script>
 -->
 <script setup>
+import { saveLoginInfo } from '~/stores/authData';
+const logInfo = saveLoginInfo();
+
 definePageMeta({
   layout: 'login'
 })
@@ -64,7 +67,6 @@ async function login() {
   });
 
   let dataRaw = toRaw(dat.value);
-  console.log(dataRaw);
-  localStorage.setItem('token', dataRaw.token);
+  logInfo.saveLoginData(dataRaw)
 }
 </script>
