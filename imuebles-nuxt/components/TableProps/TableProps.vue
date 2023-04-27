@@ -26,6 +26,9 @@
 </template>
 
 <script setup>
+import { saveLoginInfo } from '~/stores/authData';
+const logInfo = saveLoginInfo();
+
 const props = defineProps({
     head: Array,
     tabla: String
@@ -35,7 +38,7 @@ let { data: infoData } = await useFetch('http://localho.st:8091/v1/' + props.tab
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
-        'Authentication': 'Beaber ' + localStorage.getItem("token")
+        'Authentication': 'Beaber ' + logInfo.user.token
     },
 });
 </script>
