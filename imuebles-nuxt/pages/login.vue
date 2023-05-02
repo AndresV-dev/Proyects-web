@@ -1,47 +1,42 @@
 <template>
-  <form @submit.prevent="login">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  <div class="flex justify-center items-center min-h-screen bg-gray-900">
+    <div class="w-full max-w-xs">
+      <form class="bg-gray-700 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <img src="../public/img/logo2.0.png" class="px-10" alt="">
+        <h2 class="text-gray-200 mb-4 text-2xl font-semibold">Welcome back</h2>
 
-    <input v-model="form.email" type="email" class="form-control" placeholder="Email" required>
+        <div class="mb-4">
+          <label class="block text-gray-200 text-sm font-bold mb-2" for="username">
+            Username
+          </label>
+          <input
+            class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username" type="text" placeholder="e.g joe1234" />
+        </div>
 
-    <input v-model="form.password" type="password" class="form-control" placeholder="Password" required>
+        <div class="mb-4">
+          <label class="block text-gray-200 text-sm font-bold mb-2" for="password">
+            Password
+          </label>
+          <input
+            class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password" type="password" placeholder="**********" />
+        </div>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-  </form>
+        <button
+          class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="button">
+          Login
+        </button>
+
+        <a class="mt-3 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+          Don't have an account? Signup.
+        </a>
+      </form>
+    </div>
+  </div>
 </template>
-<!--
-<script>
-export default {
-  data() {
-    return {
-      form: {
-        email: "",
-        password: ""
-      }
-    }
-  },
-  methods: {
-    async login() {
-      try {
-        let { data: dat } = useFetch('http://localhost:8091/v1/auth/authenticate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: form.email,
-            password: form.password
-          })
-        });
 
-        localStorage.setItem('token', dat.value.token);
-      } catch (error) {
-        console.log("Error on Login")
-      }
-    }
-  }
-
-}
-</script>
--->
 <script setup>
 import { saveLoginInfo } from '~/stores/authData';
 const logInfo = saveLoginInfo();

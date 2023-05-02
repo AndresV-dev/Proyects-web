@@ -6,6 +6,12 @@
 </template>
 
 <script setup>
+import { saveLoginInfo } from '~/stores/authData';
+const logInfo = saveLoginInfo();
+
+if (logInfo.user?.token == "")
+    navigateTo("/login")
+
 //Se cambio esta vista para agregar los campos de tittles y tabla lo cual entregara al componente de tabla, este entregara la tabla de usuarios
 const titles = ['id', 'status', 'Nombre Usuario', 'Correo', 'Telefono', 'Fecha Inicio', 'Fecha Fin', 'Acciones'];
 const tabla = "usuario";

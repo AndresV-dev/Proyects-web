@@ -159,6 +159,9 @@
 import { saveLoginInfo } from '~/stores/authData';
 const logInfo = saveLoginInfo();
 
+if (logInfo.user?.token == "")
+    navigateTo("/login")
+
 const params = useRoute().params;
 const tittles = {
     'tramite': ['id', 'Status', 'Tipo', 'Fecha Inicio', 'Fecha Fin', 'Ultima Modificacion'],
