@@ -5,7 +5,13 @@
 </template>
 
 <script setup>
-    useHead({
-        title:"Tramites"
-    })
+import { saveLoginInfo } from '~/stores/authData';
+const logInfo = saveLoginInfo();
+
+if (logInfo.user?.token == "")
+    navigateTo("/login")
+
+useHead({
+    title: "Tramites"
+})
 </script>

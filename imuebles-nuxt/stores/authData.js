@@ -5,7 +5,8 @@ export const saveLoginInfo = defineStore('saveLoginInfo', {
                 nombre: "",
                 email: "",
                 role: "",
-                token: ""
+                token: "",
+                refresh: ""
             }
         }
     },
@@ -15,6 +16,7 @@ export const saveLoginInfo = defineStore('saveLoginInfo', {
             this.user.email = user.email
             this.user.role = user.role
             this.user.token = user.token
+            this.user.refresh = user.refresh
         }
     }
 })

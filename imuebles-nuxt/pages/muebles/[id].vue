@@ -5,11 +5,15 @@
 </template>
 
 <script setup>
-    useHead({
-        title:"Inmuebles"
-    })
+import { saveLoginInfo } from '~/stores/authData';
+const logInfo = saveLoginInfo();
+
+if (logInfo.user?.token == "")
+    navigateTo("/login")
+
+useHead({
+    title: "Inmuebles"
+})
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
