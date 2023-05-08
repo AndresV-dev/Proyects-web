@@ -1,6 +1,8 @@
 <template>
-    <div>
-        Lista de Usuarios
+    <div class="grid place-items-center">
+        <div class="h-auto w-full text-left md:px-40 md:py-10 px-20 py-5">
+            <h1 class="md:font-bold md:text-2xl text-lg font-medium"> Lista De Usuarios</h1>
+        </div>
         <TableProps v-bind:head=titles v-bind:tabla=tabla />
     </div>
 </template>

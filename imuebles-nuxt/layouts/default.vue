@@ -204,26 +204,25 @@
         <slot />
       </main>
       <!-- Footer  -->
-      <Footer class="bg-gray-600 left-0 z-20">
+      <footer class="bg-gray-600 fixed left-0 bottom-0 z-20 text-white w-full h-12 py-2">
         &copy; Andres Vargas {{ currentYear }}
-      </Footer>
+      </footer>
     </div>
   </div>
 </template>
 
 <script setup>
+import { saveLoginInfo } from '~/stores/authData';
 const currentYear = new Date().getUTCFullYear();
+
+const logInfo = saveLoginInfo();
+
+if (logInfo.user.token == null)
+  navigateTo("/login");
+
 function open() {
   document.getElementById("sidebar").classList.toggle('-translate-x-full')
 }
-
-onMounted(() => {
-  if (!process.client) return;
-  const token = localStorage.getItem('token');
-
-  if (token == null)
-    location.href('http://localhost:3000/login')
-})
 
 // hook para administrar los css y js en este caso los de Bootstrap, asi como el titulo de la pag en general
 useHead({
