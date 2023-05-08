@@ -1,22 +1,29 @@
 <template>
-    <div>
-        <table id="table" class="table table-bordered">
-            <thead>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg md:w-3/4 w-4/5 mx-20">
+        <table id="table" class="min-w-full text-center text-sm font-light m-auto">
+            <thead class="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
                 <tr>
-                    <td v-for="(column, index) in props.head" :key="index">{{ column }}</td>
+                    <th scope="col" class="px-6 py-4" v-for="(column, index) in props.head" :key="index">{{ column }}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="info in infoData">
-                    <td>{{ info.id }}</td>
-                    <td>{{ info.status == 1 ? "Activo" : "Inactivo" }}</td>
-                    <td>{{ info.nombre + ' ' + info.apellido_paterno + ' ' + info.apellido_materno }}</td>
-                    <td>{{ info.correo }}</td>
-                    <td>{{ info.telefono }}</td>
-                    <td>{{ info.fechaInicio != null ? info.fechaInicio : "No Disponible" }}</td>
-                    <td>{{ info.fechaFin != null ? info.fechaFin : "No Disponible" }}</td>
-                    <td>
-                        <NuxtLink class="rounded bg-blue-600, text-gray-800" :to='`/${props.tabla}s/${info.id}`'>Ver
+                <tr class="border-b dark:border-neutral-500" v-for="info in infoData">
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2 md:font-medium">{{ info.id }}</td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">{{ info.status == 1 ? "Activo" : "Inactivo"
+                    }}</td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">{{ info.nombre + ' ' + info.apellido_paterno
+                        + ' ' +
+                        info.apellido_materno }}</td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">{{ info.correo }}</td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">{{ info.telefono }}</td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">{{ info.fechaInicio != null ?
+                        info.fechaInicio :
+                        "No Disponible" }}</td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">{{ info.fechaFin != null ? info.fechaFin :
+                        "No Disponible" }}
+                    </td>
+                    <td class="md:whitespace-nowrap  md:px-6 md:py-4 px-3 py-2">
+                        <NuxtLink class="rounded bg-blue-700 text-white px-5 py-1.5" :to='`/${props.tabla}s/${info.id}`'>Ver
                         </NuxtLink>
                     </td>
                 </tr>
@@ -34,7 +41,7 @@ const props = defineProps({
     tabla: String
 });
 
-let { data: infoData } = await useFetch('http://localho.st:8091/v1/' + props.tabla + '/list', {
+let { data: infoData } = await useFetch('http://localho.st:8091/api/v1/' + props.tabla + '/list', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',

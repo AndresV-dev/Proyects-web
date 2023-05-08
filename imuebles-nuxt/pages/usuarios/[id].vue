@@ -173,8 +173,33 @@ useHead({
     title: "Usuario - " + params.id
 })
 
+
 let readable = false;
-const { data: usuario } = await useFetch('http://localho.st:8091/v1/usuario/id/' + params.id, {
+let { data: usuario } = await useFetch('http://localho.st:8091/api/v1/usuario/id/' + params.id, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authentication': 'Beaber ' + logInfo.user.token
+    },
+})
+
+let { data: documentos } = await useFetch('http://localho.st:8091/api/v1/documento/list/usuario/' + usuario.uuid, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authentication': 'Beaber ' + logInfo.user.token
+    },
+})
+
+let { data: tramites } = await useFetch('http://localho.st:8091/api/v1/tramite/list/usuario/' + usuario.uuid, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authentication': 'Beaber ' + logInfo.user.token
+    },
+})
+
+let { data: empresas } = await useFetch('http://localho.st:8091/api/v1/empresa/list/usuario/' + usuario.uuid, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',

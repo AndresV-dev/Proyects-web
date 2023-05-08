@@ -1,31 +1,39 @@
 <template>
   <div class="flex justify-center items-center min-h-screen bg-gray-900">
     <div class="md:w-[30rem]">
-      <form class="bg-gray-700 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form @submit.prevent="register" class="bg-gray-700 shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 class="text-gray-200 mb-4 text-2xl font-semibold">
-          Registration Form
+          Formulario de Registro
         </h2>
         <div class="mb-4">
-          <label class="block text-gray-200 text-sm font-bold mb-2" for="fullname">
-            Fullname
+          <label class="block text-gray-200 text-sm font-bold mb-2" for="name">
+            Name
           </label>
-          <input
+          <input v-model="form.name"
             class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="fullname" type="text" placeholder="Joe Doe" />
+            id="name" type="text" placeholder="Maria" />
         </div>
         <div class="mb-4">
-          <label class="block text-gray-200 text-sm font-bold mb-2" for="username">
-            Username
+          <label class="block text-gray-200 text-sm font-bold mb-2" for="apellido_paterno">
+            Apellido Paterno
           </label>
-          <input
+          <input v-model="form.apellido_paterno"
             class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username" type="text" placeholder="e.g joe1234" />
+            id="apellido_paterno" type="text" placeholder="Villa" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-200 text-sm font-bold mb-2" for="apellido_materno">
+            Apellido Materno
+          </label>
+          <input v-model="form.apellido_materno"
+            class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="apellido_materno" type="text" placeholder="Juarez" />
         </div>
         <div class="mb-4">
           <label class="block text-gray-200 text-sm font-bold mb-2" for="email">
             Email Address
           </label>
-          <input
+          <input v-model="form.email"
             class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email" type="text" placeholder="joedoe1234@email.com" />
         </div>
@@ -41,14 +49,14 @@
           <label class="block text-gray-200 text-sm font-bold mb-2" for="cpassword">
             Confirm Password
           </label>
-          <input
+          <input v-model="form.password"
             class="shadow-sm appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password" type="password" placeholder="**********" />
         </div>
 
         <button
           class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button">
+          type="submit">
           Submit
         </button>
 
@@ -86,6 +94,6 @@ function register() {
     })
   })
 
-  location.href('http://localhost:3000/login')
+  navigateTo("/login");
 }
 </script>
