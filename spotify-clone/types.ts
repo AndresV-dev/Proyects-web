@@ -31,17 +31,17 @@ export interface Suscription {
 
 export interface Price {
     id: string;
-    productId?: string;
+    product_id?: string;
     active?: boolean;
     description?: string;
-    unitAmount?: number;
+    unit_amount?: number;
     currency?: string;
-    type?: string;
-    interval?: string;
-    intervalCount?: number;
-    trialPeriodDays?: number;
+    type?: Stripe.Price.Type;
+    interval?: Stripe.Price.Recurring.Interval;
+    interval_count?: number;
+    trial_period_days?: number | null;
     metadata?: Stripe.Metadata;
-    product?: Product;
+    products?: Product;
 }
 
 export interface Product {
