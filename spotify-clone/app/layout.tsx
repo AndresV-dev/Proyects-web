@@ -9,6 +9,7 @@ import type { Metadata } from 'next'
 import { Figtree } from 'next/font/google'
 import ToasterProvider from '@/providers/ToasterProvider';
 import getSongsByUserId from '@/actions/getSongsByUserId';
+import getActiveProductsWithPrices from '@/actions/getActiveProductsWithPrices';
 
 const font = Figtree({ subsets: ['latin'] })
 
@@ -25,13 +26,14 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const userSongs = await getSongsByUserId();
+  const productos = await getActiveProductsWithPrices();
   return (
     <html lang="en">
       <body className={font.className}>
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider />
+            <ModalProvider products={productos} />
             <Sidebar songs={userSongs}>
               {children}
             </Sidebar>

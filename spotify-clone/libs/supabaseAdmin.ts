@@ -65,14 +65,14 @@ const createOrRetrieveACostumer = async ({email, uuid}: {email: string, uuid: st
 
         const { error: supabaseError } = await supabaseAdmin.from('customers').insert([{
             id: uuid,
-            stripe_costumer_id: customer.id
+            stripe_customer_id: customer.id
         }]);
 
     if(supabaseError) throw supabaseError;
 
     console.log(`Customer Created: ${customer.id}`);
 
-    return customer;
+    return customer.id;
     }
     return data.stripe_customer_id;
 }
@@ -102,7 +102,7 @@ const manageSubscriptionStatusChange = async (subscriptionId: string, customerId
     const { id: uuid} = customerData;
     
     const subscription = await stripe.subscriptions.retrieve(subscriptionId,{expand: ['default_payment_method']});
-    const suscriptionData: Database["public"]["Tables"]["subscriptions"]["Insert"] = {
+    const subscriptionData: Database["public"]["Tables"]["subscriptions"]["Insert"] = {
         id: subscription.id,
         user_id: uuid,
         metadata: subscription.metadata,
@@ -122,7 +122,7 @@ const manageSubscriptionStatusChange = async (subscriptionId: string, customerId
         trial_end: subscription.trial_end ? toDateTime(subscription.trial_end).toISOString(): null,
     }
 
-    const { error } = await supabaseAdmin.from('subscriptions').upsert([suscriptionData]).single();
+    const { error } = await supabaseAdmin.from('subscriptions').upsert([subscriptionData]).single();
 
     if(error) throw error;
 
